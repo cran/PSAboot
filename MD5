@@ -1,12 +1,12 @@
-d73306dbf9bef64792c5722808a648c8 *DESCRIPTION
+ce4a544ea8d068a0ea61773cf3d05527 *DESCRIPTION
 59f3add015b66b66e1e28add954f2afa *NAMESPACE
 58771d82079dfd60b55da353f0100ce1 *NEWS
 de7f170432f1c4713500e619bf3c6d47 *R/PSAboot-package.R
 03e7fb116a76320da36a847c9ab263e2 *R/PSAboot.R
 0717d791a23784ec775da96f3a26f796 *R/balance.R
-5b5c289a7d4ad1f6cae933f8b2276b38 *R/balance.boxplot.R
+301976fdb7c47983d927cb6338df7acf *R/balance.boxplot.R
 39c5ed24b70ae8b3f8f8569fb6345dcb *R/balance.matching.R
-24d068b9bc350ddb87a94b4aeefb010f *R/balance.plot.R
+89537de5dbf70b31efb5b9d4c3a9daca *R/balance.plot.R
 15c2ba28d74bec138148cf248e77f61d *R/balance.print.R
 b8939f2261c99e11ce4de74cd01bf8a3 *R/boot.ctree.R
 21fa58e3040704f25e64b134d6fdd391 *R/boot.matching.R
@@ -15,13 +15,13 @@ c2bce08c34418872ac9bb0ca39f9e547 *R/boot.matchit.R
 8da5ecbfcfc55fe9ed4c9dd34ad58856 *R/boot.strata.R
 8c8cc67775a79931323363da8c33583c *R/boxplot.PSAboot.R
 872a87b8ebdab61a9d07218bb282c5aa *R/hist.PSAboot.R
-7c8fe652f26a37ec51f19f3e82e205d3 *R/plot.PSAboot.R
+920fce7e29332ce904e7ac547dc1292f *R/plot.PSAboot.R
 13ec1791faacd1ad95e71b8410bb725b *R/plot.PSAboot.matrix.R
 449d81f76b2a5a205381148a4b9173c5 *R/print.PSAboot.R
 e4030baa0969ec818ee676a348ce8d3b *R/psa.strata.R
 80604cc9b54ff794680fc8c4bbd9137e *R/quantiles.R
 078c8bf218311be824d5d3ed0e1dd03e *R/summary.PSAboot.R
-da15960cc5b0a7badd6544d601fa722e *build/vignette.rds
+1e52a8ad47264ed543893e9bea62801a *build/vignette.rds
 2a046fb313d9dbd92d49e79778dcdda9 *data/pisa.psa.cols.R
 8485ade80f9dea647ea701c2ee49a349 *data/pisalux.rda
 251b446723486e3313fb5cfd8d60937a *data/pisausa.rda
@@ -31,7 +31,7 @@ da15960cc5b0a7badd6544d601fa722e *build/vignette.rds
 1f9ca89832a67fe739c420ab416282aa *demo/PSAbootTutoring.R
 67e3110b003f2092349f17c80d1033d0 *inst/doc/MatchingOrder.R
 26216587904d5a525a427855dd485b92 *inst/doc/MatchingOrder.Rmd
-14918c79b035a00fd8cd7b522e94ab53 *inst/doc/MatchingOrder.html
+b5772e3242047de0531e2ddaf07e1c06 *inst/doc/MatchingOrder.html
 67b6d377cb9f3456fab3d81341372a07 *inst/doc/PSAboot.R
 8d3654313e9ed65515f404a8076d8cfd *inst/doc/PSAboot.Rmd
 f8227cd00c61a682d8c843a71c9bceaf *inst/doc/PSAboot.html
@@ -63,4 +63,4 @@ cbd9f0da2cccee296d174522a93f1c5a *man/psa.strata.Rd
 6b889882318bc27f5fe3157408fdf9c0 *man/q75.Rd
 f45d432216062eef95cb23521759f8f9 *man/summary.PSAboot.Rd
 26216587904d5a525a427855dd485b92 *vignettes/MatchingOrder.Rmd
-d4fece5680d90c1bd8e7e8b4efa2163d *vignettes/PSAboot.Rmd
+c2d185d07ae7f7aa01a9be26c10a4fdf *vignettes/PSAboot.Rmd
