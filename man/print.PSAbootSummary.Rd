@@ -13,7 +13,9 @@
 
 \item{...}{unused.}
 }
+\value{
+Nothing returned.
+}
 \description{
 Print method for PSAboot Summary.
 }
-

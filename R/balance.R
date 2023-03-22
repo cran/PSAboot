@@ -12,15 +12,27 @@
 #' @return a list with three elements:
 #' \describe{
 #' 	\item{unadjusted}{named numeric vector with unadjusted effect size before
-#' 	                  adjustment for each covaraite}
+#' 	                  adjustment for each covariate}
 #' 	\item{complete}{a matrix with adjusted effect size for each covariate (columns)
 #' 	                for each method (rows).}
 #' 	\item{pooled}{a matrix with mean adjusted effect size for all covariates for each
 #' 	              method (columns) and each bootstrap sample (rows).}
 #' 	\item{balances}{a list with an M x n covariates matrix for each method.}
 #' }
+#' @examples
+#' \donttest{
+#' library(PSAboot)
+#' data(pisa.psa.cols)
+#' data(pisausa)
+#' bm.usa <- PSAboot(Tr = as.integer(pisausa$PUBPRIV) - 1,
+#'     Y = pisausa$Math,
+#'     X = pisausa[,pisa.psa.cols],
+#'     control.ratio = 5, M = 100, seed = 2112)
+#' bm.usa.bal <- balance(bm.usa)
+#' 
+#' }
 #' @export
-balance <- function(psaboot, na.rm=TRUE, pool.fun=mean) {
+balance <- function(psaboot, na.rm = TRUE, pool.fun = mean) {
 	if('factor' %in% sapply(psaboot$X, class)) {
 		X.trans <- cv.trans.psa(psaboot$X)[[1]]
 	} else {

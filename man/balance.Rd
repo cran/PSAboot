@@ -21,7 +21,7 @@ any function that takes a vector of numeric values.}
 a list with three elements:
 \describe{
 	\item{unadjusted}{named numeric vector with unadjusted effect size before
-	                  adjustment for each covaraite}
+	                  adjustment for each covariate}
 	\item{complete}{a matrix with adjusted effect size for each covariate (columns)
 	                for each method (rows).}
 	\item{pooled}{a matrix with mean adjusted effect size for all covariates for each
@@ -32,4 +32,16 @@ a list with three elements:
 \description{
 This method provides some crude overall measures of balance.
 }
+\examples{
+\donttest{
+library(PSAboot)
+data(pisa.psa.cols)
+data(pisausa)
+bm.usa <- PSAboot(Tr = as.integer(pisausa$PUBPRIV) - 1,
+    Y = pisausa$Math,
+    X = pisausa[,pisa.psa.cols],
+    control.ratio = 5, M = 100, seed = 2112)
+bm.usa.bal <- balance(bm.usa)
 
+}
+}

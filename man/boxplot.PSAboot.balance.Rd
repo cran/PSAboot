@@ -4,8 +4,14 @@
 \alias{boxplot.PSAboot.balance}
 \title{Boxplot of the balance statistics for bootstrapped samples.}
 \usage{
-\method{boxplot}{PSAboot.balance}(x, unadjusted.color = "red",
-  pooled.color = "blue", point.size = 3, point.alpha = 0.5, ...)
+\method{boxplot}{PSAboot.balance}(
+  x,
+  unadjusted.color = "red",
+  pooled.color = "blue",
+  point.size = 3,
+  point.alpha = 0.5,
+  ...
+)
 }
 \arguments{
 \item{x}{results of \code{\link{balance}}}
@@ -26,4 +32,16 @@ a ggplot2 expression.
 \description{
 Boxplot of the balance statistics for bootstrapped samples.
 }
-
+\examples{
+\donttest{
+library(PSAboot)
+data(pisa.psa.cols)
+data(pisausa)
+bm.usa <- PSAboot(Tr = as.integer(pisausa$PUBPRIV) - 1,
+    Y = pisausa$Math,
+    X = pisausa[,pisa.psa.cols],
+    control.ratio = 5, M = 100, seed = 2112)
+bm.usa.bal <- balance(bm.usa)
+boxplot(bm.usa.bal, nrow = 1)
+}
+}

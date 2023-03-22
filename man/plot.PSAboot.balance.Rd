@@ -4,8 +4,13 @@
 \alias{plot.PSAboot.balance}
 \title{Plot method for balance.}
 \usage{
-\method{plot}{PSAboot.balance}(x, unadjusted.color = "red",
-  complete.color = "blue", pooled.color = "black", ...)
+\method{plot}{PSAboot.balance}(
+  x,
+  unadjusted.color = "red",
+  complete.color = "blue",
+  pooled.color = "black",
+  ...
+)
 }
 \arguments{
 \item{x}{results from \code{\link{balance}}}
@@ -16,12 +21,27 @@ unadjusted effect size for all covariates.}
 \item{complete.color}{color of the vertical line representing the mean adjusted
 effect size for all covariates using the complete dataset.}
 
-\item{pooled.color}{color of the vertical line represeting the mean adjusted
+\item{pooled.color}{color of the vertical line representing the mean adjusted
 effect size for all covariates across all bootstrapped samples.}
 
 \item{...}{currently unused.}
 }
+\value{
+a ggplot2 expression.
+}
 \description{
 Plot method for balance.
 }
-
+\examples{
+\donttest{
+library(PSAboot)
+data(pisa.psa.cols)
+data(pisausa)
+bm.usa <- PSAboot(Tr = as.integer(pisausa$PUBPRIV) - 1,
+    Y = pisausa$Math,
+    X = pisausa[,pisa.psa.cols],
+    control.ratio = 5, M = 100, seed = 2112)
+bm.usa.bal <- balance(bm.usa)
+plot(bm.usa.bal)
+}
+}

@@ -4,8 +4,18 @@
 #'        \code{\link{Match}} for more details. 
 #' @param ... other parameters passed to \code{\link{Match}}.
 #' @inheritParams boot.strata
+#' @return a list with three elements:
+#'         \describe{
+#'         \item{\code{summary}}{a named numeric vector (with at minimum \code{estimate}, 
+#'         \code{ci.min}, and \code{ci.max} but other values allowed)}
+#'         \item{\code{balance}}{a named numeric vector with one element per 
+#'         covariate listed in \code{X.trans} representing a balance statistic 
+#'         (usually standardized effect size after adjustment)}
+#'         \item{\code{details}}{an arbitrary object that contains the full results of the
+#'         analysis}
+#'         }
 #' @export
-boot.matching <- function(Tr, Y, X, X.trans, formu, estimand='ATE', ...) {
+boot.matching <- function(Tr, Y, X, X.trans, formu, estimand = 'ATE', ...) {
 	formu <- update.formula(formu, 'treat ~ .')
 	ps <- fitted(glm(formu, data=cbind(treat=Tr, X), family='binomial'))
 	mr <- Matching::Match(Y=Y, Tr=Tr, X=ps, estimand=estimand, ...)

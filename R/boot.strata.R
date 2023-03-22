@@ -5,7 +5,7 @@
 #' @param X matrix or data frame of covariates.
 #' @param X.trans a data frame of \code{X} with factors recoded. See \code{\link{cv.trans.psa}}
 #' @param formu the formula to use to estimate propensity scores. Note that the
-#'        dependent varaible (i.e. treatment variable) name will be updated using
+#'        dependent varaible (i.e. treatment varaible) name will be updated using
 #'        the \code{Tr} vector.
 #' @param nstrata number of strata to divide the propensity scores.
 #' @param ... other parameters passed from \code{\link{PSAboot}}
@@ -20,7 +20,7 @@
 #'         analysis}
 #'         }
 #' @export
-boot.strata <- function(Tr, Y, X, X.trans, formu, nstrata=5, ...) {
+boot.strata <- function(Tr, Y, X, X.trans, formu, nstrata = 5, ...) {
 	formu <- update.formula(formu, 'treat ~ .')
 	ps <- fitted(glm(formu, data=cbind(treat=Tr, X), family='binomial'))
 	strata <- cut(ps, quantile(ps, seq(0, 1, 1/nstrata)), include.lowest=TRUE, 

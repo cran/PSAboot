@@ -16,10 +16,12 @@ psa.strata(Y, Tr, strata, trim = 0, minStrata = 5)
 \item{trim}{allows for a trimmed mean as outcome measure, where trim is from
 0 to .5 (.5 implying median).}
 
-\item{minStrata}{minimum number of treatment or control unitis within a strata 
+\item{minStrata}{minimum number of treatment or control units within a strata 
 to include that strata.}
+}
+\value{
+a character vector containing summary.strata, ATE, se.wtd, approx.t, df, and CI.95.
 }
 \description{
 Propensity Score Analysis using Stratification
 }
-

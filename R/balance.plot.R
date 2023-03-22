@@ -5,15 +5,28 @@
 #'        unadjusted effect size for all covariates.
 #' @param complete.color color of the vertical line representing the mean adjusted
 #'        effect size for all covariates using the complete dataset.
-#' @param pooled.color color of the vertical line represeting the mean adjusted
+#' @param pooled.color color of the vertical line representing the mean adjusted
 #'        effect size for all covariates across all bootstrapped samples.
 #' @param ... currently unused.
 #' @method plot PSAboot.balance
+#' @return a ggplot2 expression.
+#' @examples
+#' \donttest{
+#' library(PSAboot)
+#' data(pisa.psa.cols)
+#' data(pisausa)
+#' bm.usa <- PSAboot(Tr = as.integer(pisausa$PUBPRIV) - 1,
+#'     Y = pisausa$Math,
+#'     X = pisausa[,pisa.psa.cols],
+#'     control.ratio = 5, M = 100, seed = 2112)
+#' bm.usa.bal <- balance(bm.usa)
+#' plot(bm.usa.bal)
+#' }
 #' @export
 plot.PSAboot.balance <- function(x, 
-								 unadjusted.color='red', 
-								 complete.color='blue', 
-								 pooled.color='black', 
+								 unadjusted.color = 'red', 
+								 complete.color = 'blue', 
+								 pooled.color = 'black', 
 								 ...) {
 	df.complete <- x$complete
 	df.complete <- reshape2::melt(apply(df.complete, 1, x$pool.fun, na.rm=TRUE))

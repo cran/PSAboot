@@ -16,15 +16,26 @@ boot.ctree(Tr, Y, X, X.trans, formu, minStrata = 5, ...)
 \item{X.trans}{a data frame of \code{X} with factors recoded. See \code{\link{cv.trans.psa}}}
 
 \item{formu}{the formula to use to estimate propensity scores. Note that the
-dependent varaible (i.e. treatment variable) name will be updated using
+dependent varaible (i.e. treatment varaible) name will be updated using
 the \code{Tr} vector.}
 
-\item{minStrata}{minimum number of treatment or control unitis within a strata 
+\item{minStrata}{minimum number of treatment or control units within a strata 
 to include that strata.}
 
 \item{...}{other parameters passed from \code{\link{PSAboot}}}
 }
+\value{
+a list with three elements:
+        \describe{
+        \item{\code{summary}}{a named numeric vector (with at minimum \code{estimate}, 
+        \code{ci.min}, and \code{ci.max} but other values allowed)}
+        \item{\code{balance}}{a named numeric vector with one element per 
+        covariate listed in \code{X.trans} representing a balance statistic 
+        (usually standardized effect size after adjustment)}
+        \item{\code{details}}{an arbitrary object that contains the full results of the
+        analysis}
+        }
+}
 \description{
 Stratification using classification trees for bootstrapping.
 }
-

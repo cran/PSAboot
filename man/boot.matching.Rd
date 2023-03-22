@@ -16,7 +16,7 @@ boot.matching(Tr, Y, X, X.trans, formu, estimand = "ATE", ...)
 \item{X.trans}{a data frame of \code{X} with factors recoded. See \code{\link{cv.trans.psa}}}
 
 \item{formu}{the formula to use to estimate propensity scores. Note that the
-dependent varaible (i.e. treatment variable) name will be updated using
+dependent varaible (i.e. treatment varaible) name will be updated using
 the \code{Tr} vector.}
 
 \item{estimand}{character string for estimand, either ATE, ATT, or ATC. See
@@ -24,7 +24,18 @@ the \code{Tr} vector.}
 
 \item{...}{other parameters passed to \code{\link{Match}}.}
 }
+\value{
+a list with three elements:
+        \describe{
+        \item{\code{summary}}{a named numeric vector (with at minimum \code{estimate}, 
+        \code{ci.min}, and \code{ci.max} but other values allowed)}
+        \item{\code{balance}}{a named numeric vector with one element per 
+        covariate listed in \code{X.trans} representing a balance statistic 
+        (usually standardized effect size after adjustment)}
+        \item{\code{details}}{an arbitrary object that contains the full results of the
+        analysis}
+        }
+}
 \description{
 Matching package implementation for bootstrapping.
 }
-

@@ -1,12 +1,12 @@
 utils::globalVariables(c('estimate','method','bootstrap.estimate','bootstrap.ci.min',
 						 'bootstrap.ci.max','variable'))
 
-#' Boxplot of PSA boostrap results.
+#' Boxplot of PSA bootstrap results.
 #' 
 #' @param x result of \code{\link{PSAboot}}.
 #' @param tufte use Tufte's boxplot style. Requires the \code{ggthemes} package.
 #' @param coord.flip Whether to flip the coordinates.
-#' @param bootstrap.mean.color the color of the point for the boostrap mean, or NA
+#' @param bootstrap.mean.color the color of the point for the bootstrap mean, or NA
 #'        to omit.
 #' @param bootstrap.ci.color the color of the confidence intervals of the bootstrap
 #'        samples, or NA to omit.
@@ -16,21 +16,24 @@ utils::globalVariables(c('estimate','method','bootstrap.estimate','bootstrap.ci.
 #'        mean, or NA to omit.
 #' @param ... unused
 #' @method boxplot PSAboot
+#' @return a ggplot2 expression.
 #' @export
 boxplot.PSAboot <- function(x,
-							bootstrap.mean.color='blue',
-							bootstrap.ci.color='green',
-							bootstrap.ci.width=0.5,
-							bootstrap.ci.size=3,
-							overall.mean.color='red',
-							tufte=FALSE, 
-							coord.flip=TRUE,
+							bootstrap.mean.color = 'blue',
+							bootstrap.ci.color = 'green',
+							bootstrap.ci.width = 0.5,
+							bootstrap.ci.size = 3,
+							overall.mean.color = 'red',
+							tufte = FALSE, 
+							coord.flip = TRUE,
 							...) {
 	sum <- as.data.frame(summary(x))
 	pooled.mean <- mean(x$pooled.summary$estimate, na.rm=TRUE)
 	pooled.sd <- sd(x$pooled.summary$estimate, na.rm=TRUE)
-	pooled.ci <- c(ci.min=pooled.mean - (qnorm(0.975) * pooled.sd/sqrt(x$M)),
-				   ci.max=pooled.mean + (qnorm(0.975) * pooled.sd/sqrt(x$M)))
+	# pooled.ci <- c(ci.min=pooled.mean - (qnorm(0.975) * pooled.sd/sqrt(x$M)),
+	# 			   ci.max=pooled.mean + (qnorm(0.975) * pooled.sd/sqrt(x$M)))
+	pooled.ci <- c(ci.min=pooled.mean - (qnorm(0.975) * pooled.sd),
+				   ci.max=pooled.mean + (qnorm(0.975) * pooled.sd))
 	p <- ggplot(x$pooled.summary, aes(y=estimate, x=method)) +
 		geom_hline(yintercept=0, alpha=.5, size=2)
 	if(!is.na(bootstrap.ci.color)) {
@@ -45,7 +48,7 @@ boxplot.PSAboot <- function(x,
 							   width=bootstrap.ci.width, size=bootstrap.ci.size)
 	}
 	if(tufte) {
-		p <- p + geom_tufteboxplot()		
+		p <- p + ggthemes::geom_tufteboxplot()		
 	} else {
 		p <- p + geom_boxplot(alpha=.5)		
 	}

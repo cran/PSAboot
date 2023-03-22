@@ -1,59 +1,65 @@
-## ----setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE-----
+## ----setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE----------
 require(knitr)
-opts_chunk$set(comment='')
+opts_chunk$set(comment = '')
 require(PSAboot)
 
-boot.M <- 50 # Change for the final version
+## -----------------------------------------------------------------------------
+boot.M <- 10
 
-## ----install, eval=FALSE-------------------------------------------------
-#  devtools::install_github('PSAboot','jbryer')
+## ----BootSizeWarning, echo=FALSE, results='asis'------------------------------
+if(boot.M < 100) {
+	cat(paste0('**NOTE: This vignette uses ', boot.M, ' bootstrap samples. It is ',
+	    'generally recommended to use at least 100 bootstrap samples or more for final publication.**'))
+}
 
-## ----defineCustomFunction------------------------------------------------
+## ----install, eval=FALSE------------------------------------------------------
+#  devtools::install_github('jbryer/PSAboot')
+
+## ----defineCustomFunction-----------------------------------------------------
 boot.matching.1to3 <- function(Tr, Y, X, X.trans, formu, ...) {
 	return(boot.matching(Tr=Tr, Y=Y, X=X, X.trans=X.trans, formu=formu, M=3, ...))
 }
 
-## ----lalonde.load--------------------------------------------------------
+## ----lalonde.load-------------------------------------------------------------
 data(lalonde, package='MatchIt')
 table(lalonde$treat)
 
-## ----lalonde.boot, cache=TRUE--------------------------------------------
-lalonde.formu <- treat ~ age + I(age^2) + educ + I(educ^2) + black +
-	hispan + married + nodegree + re74  + I(re74^2) + re75 + I(re75^2) +
-	re74 + re75
-boot.lalonde <- PSAboot(Tr=lalonde$treat, 
-						Y=lalonde$re78,
-						X=lalonde,
-						formu=lalonde.formu,
-						M=boot.M, 
-						seed=2112)
+## ----lalonde.boot, cache=FALSE------------------------------------------------
+lalonde.formu <- treat ~ age + I(age^2) + educ + I(educ^2) + race +
+	married + nodegree + re74  + I(re74^2) + re75 + I(re75^2)
+boot.lalonde <- PSAboot(Tr = lalonde$treat, 
+						Y = lalonde$re78,
+						X = lalonde,
+						formu = lalonde.formu,
+						M = 100, 
+						seed = 2112)
 
-## ----lalondeSummary------------------------------------------------------
+## ----lalondeSummary-----------------------------------------------------------
 summary(boot.lalonde)
 
-## ----lalonde.plot--------------------------------------------------------
+## ----lalonde.plot-------------------------------------------------------------
 plot(boot.lalonde)
 
-## ----lalonde.histogram, warning=FALSE, message=FALSE---------------------
+## ----lalonde.histogram, warning=FALSE, message=FALSE--------------------------
 hist(boot.lalonde)
 
-## ----lalonde.boxplot-----------------------------------------------------
+## ----lalonde.boxplot----------------------------------------------------------
 boxplot(boot.lalonde)
 
-## ----lalonde.matrixplot--------------------------------------------------
+## ----lalonde.matrixplot, warning = FALSE--------------------------------------
 matrixplot(boot.lalonde)
 
-## ----lalonde.balance, cache=TRUE-----------------------------------------
+## ----lalonde.balance, cache=FALSE---------------------------------------------
 lalonde.bal <- balance(boot.lalonde)
 lalonde.bal
 
-## ----lalonde.balance.plot------------------------------------------------
+## ----lalonde.balance.plot-----------------------------------------------------
 plot(lalonde.bal)
 
-## ----lalonde.balance.boxplot---------------------------------------------
+## ----lalonde.balance.boxplot--------------------------------------------------
 boxplot(lalonde.bal)
 
-## ----tutoring.setup------------------------------------------------------
+## ----tutoring.setup-----------------------------------------------------------
 require(TriMatch)
 require(PSAboot)
 data(tutoring, package='TriMatch')
@@ -63,7 +69,7 @@ covs <- tutoring[,c('Gender', 'Ethnicity', 'Military', 'ESL', 'EdMother', 'EdFat
 
 table(tutoring$treatbool)
 
-## ----tutoring.psaboot, cache=TRUE----------------------------------------
+## ----tutoring.psaboot, cache=FALSE--------------------------------------------
 tutoring.boot <- PSAboot(Tr=tutoring$treatbool, 
 						 Y=tutoring$Grade, 
 						 X=covs, 
@@ -80,19 +86,19 @@ tutoring.boot <- PSAboot(Tr=tutoring$treatbool,
 )
 summary(tutoring.boot)
 
-## ----tutoring.plot-------------------------------------------------------
+## ----tutoring.plot------------------------------------------------------------
 plot(tutoring.boot)
 
-## ----tutoring.histogram, message=FALSE, warning=FALSE--------------------
+## ----tutoring.histogram, message=FALSE, warning=FALSE-------------------------
 hist(tutoring.boot)
 
-## ----tutoring.boxplot----------------------------------------------------
+## ----tutoring.boxplot---------------------------------------------------------
 boxplot(tutoring.boot)
 
-## ----tutoring.matrixplot-------------------------------------------------
+## ----tutoring.matrixplot------------------------------------------------------
 matrixplot(tutoring.boot)
 
-## ----tutroing.balance----------------------------------------------------
+## ----tutroing.balance---------------------------------------------------------
 tutoring.bal <- balance(tutoring.boot)
 tutoring.bal
 plot(tutoring.bal)
