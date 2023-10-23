@@ -1,6 +1,12 @@
 ## ----setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE----------
 require(knitr)
-opts_chunk$set(comment = '')
+opts_chunk$set(fig.width = 12,
+			   fig.height = 8,
+			   fig.align = 'center',
+			   out.width = '100%',
+			   echo = TRUE,
+			   warning = FALSE,
+			   message = FALSE)
 require(PSAboot)
 
 ## -----------------------------------------------------------------------------
@@ -21,12 +27,13 @@ boot.matching.1to3 <- function(Tr, Y, X, X.trans, formu, ...) {
 }
 
 ## ----lalonde.load-------------------------------------------------------------
-data(lalonde, package='MatchIt')
+data(lalonde, package='Matching')
 table(lalonde$treat)
 
 ## ----lalonde.boot, cache=FALSE------------------------------------------------
-lalonde.formu <- treat ~ age + I(age^2) + educ + I(educ^2) + race +
-	married + nodegree + re74  + I(re74^2) + re75 + I(re75^2)
+lalonde.formu <- treat~age + I(age^2) + educ + I(educ^2) + black +
+             hisp + married + nodegr + re74  + I(re74^2) + re75 + I(re75^2) +
+             u74 + u75
 boot.lalonde <- PSAboot(Tr = lalonde$treat, 
 						Y = lalonde$re78,
 						X = lalonde,
@@ -95,7 +102,7 @@ hist(tutoring.boot)
 ## ----tutoring.boxplot---------------------------------------------------------
 boxplot(tutoring.boot)
 
-## ----tutoring.matrixplot------------------------------------------------------
+## ----tutoring.matrixplot, fig.width = 12, fig.height = 12---------------------
 matrixplot(tutoring.boot)
 
 ## ----tutroing.balance---------------------------------------------------------

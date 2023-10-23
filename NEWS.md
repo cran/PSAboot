@@ -1,3 +1,12 @@
+# PSAboot 1.3.8
+
+* Fix for change in t.test with paired data to not use the formula notation.
+
+# PSAboot 1.3.7
+
+* Added propensity score weighting.
+* Fixed a bug where the balance table wasn't combined correctly if the covariates were not specified in the correct order.
+
 # PSAboot 1.3.6
 
 * Update to re-release to CRAN.

@@ -42,17 +42,18 @@ balance <- function(psaboot, na.rm = TRUE, pool.fun = mean) {
 	
 	bal.unadj <- c()
 	for(i in names(X.trans)) {
-		ttest <- t.test(cov ~ treat, data=cbind(treat=Tr, cov=X.trans[,i]), paired=FALSE)
+		# ttest <- t.test(cov ~ treat, data=cbind(treat=Tr, cov=X.trans[,i]), paired=FALSE)
+		ttest <- t.test(X.trans[,i,drop=TRUE], Tr, paired = FALSE)
 		bal.unadj[i] <- abs(diff(ttest$estimate) / sd(X.trans[,i]))
 	}
 
 	index.balance <- which(substr(names(psaboot$complete.details), 1, 8) == 'balance.')
 	index.names <- substr(names(psaboot$complete.details)[index.balance], 9, 
 						  max(nchar(names(psaboot$complete.details))))
-	bal <- psaboot$complete.details[[ index.balance[1] ]]
+	bal_names <- names(psaboot$complete.details[[ index.balance[1] ]])
 	bal <- c()
 	for(i in index.balance) {
-		bal <- rbind(bal, psaboot$complete.details[[ i ]])
+		bal <- rbind(bal, psaboot$complete.details[[ i ]][bal_names])
 	}
 	bal <- abs(bal)
 	dimnames(bal)[[1]] <- index.names
