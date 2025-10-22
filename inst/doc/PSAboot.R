@@ -19,7 +19,7 @@ if(boot.M < 100) {
 }
 
 ## ----install, eval=FALSE------------------------------------------------------
-#  devtools::install_github('jbryer/PSAboot')
+# devtools::install_github('jbryer/PSAboot')
 
 ## ----defineCustomFunction-----------------------------------------------------
 boot.matching.1to3 <- function(Tr, Y, X, X.trans, formu, ...) {
